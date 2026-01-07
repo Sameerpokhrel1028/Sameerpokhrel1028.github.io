@@ -1,12 +1,11 @@
 :root{
-  --max: 1500px;
   --bg: #ffffff;
   --text: #111;
-  --muted: #5b5b5b;
-  --line: #e9e9e9;
+  --muted: #555;
+  --line: #e5e5e5;
   --card: #fafafa;
-  --radius: 16px;
-  --shadow: 0 6px 18px rgba(0,0,0,.06);
+  --radius: 18px;
+  --shadow: 0 8px 22px rgba(0,0,0,.06);
 }
 
 *{ box-sizing: border-box; }
@@ -16,68 +15,95 @@ body{
   background: var(--bg);
   color: var(--text);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  line-height: 1.6;
+  line-height: 1.75;
+  font-size: 17px;
 }
 
 a{ color: inherit; text-decoration: none; }
 a:hover{ text-decoration: underline; }
 
+/* FULL WIDTH */
 .wrap{
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 24px 24px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 32px 40px;
 }
 
+/* LAYOUT */
 .layout{
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 24px;
+  grid-template-columns: 420px 1fr;
+  gap: 36px;
+  align-items: start;
 }
 
-.sidebar{ position: sticky; top: 24px; }
+/* SIDEBAR */
+.sidebar{
+  position: sticky;
+  top: 32px;
+}
 
 .card{
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--card);
-  padding: 18px;
+  padding: 22px;
   box-shadow: var(--shadow);
 }
 
-.profile{ display: grid; gap: 12px; }
+.profile{ display: grid; gap: 16px; }
 
 .avatar{
-  width: 140px;
-  height: 140px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--line);
 }
 
-.name{ font-size: 26px; font-weight: 800; margin: 0; }
-.role{ color: var(--muted); font-weight: 600; font-size: 14px; }
+.name{
+  font-size: 30px;
+  font-weight: 800;
+  margin: 0;
+}
 
-.meta{ font-size: 14px; color: var(--muted); }
+.role{
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.meta{
+  font-size: 15px;
+  color: var(--muted);
+}
+
 .meta div{ margin-top: 6px; }
 
 .iconrow{
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
-  margin-top: 10px;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .pill{
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 6px 12px;
+  padding: 8px 14px;
   background: #fff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
 }
 
-.smallnote{ font-size: 13px; color: var(--muted); margin-top: 12px; }
+.smallnote{
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 14px;
+}
 
+/* MAIN */
 .main{
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -85,21 +111,23 @@ a:hover{ text-decoration: underline; }
   box-shadow: var(--shadow);
 }
 
+/* TOP NAV */
 .topnav{
   display: flex;
-  gap: 10px;
-  padding: 14px 16px;
+  gap: 14px;
+  padding: 18px 22px;
   border-bottom: 1px solid var(--line);
   background: #fff;
+  flex-wrap: wrap;
 }
 
 .topnav a{
   border: 1px solid var(--line);
-  padding: 8px 12px;
-  border-radius: 12px;
+  padding: 10px 16px;
+  border-radius: 14px;
   background: var(--card);
   font-weight: 700;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .topnav a.active{
@@ -107,34 +135,57 @@ a:hover{ text-decoration: underline; }
   background: #fff;
 }
 
+/* CONTENT */
 .section{
-  padding: 18px 16px;
+  padding: 28px 26px;
+}
+
+.section h2{
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 14px;
 }
 
 .item{
   border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 12px;
-  margin-top: 10px;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-top: 14px;
   background: var(--card);
 }
 
-.item .title{ font-weight: 800; }
-.item .when{ font-size: 13px; color: var(--muted); }
+.item .title{
+  font-weight: 800;
+  font-size: 18px;
+}
 
+.item .when{
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* FOOTER */
 .footer{
-  padding: 14px 16px;
-  font-size: 13px;
+  padding: 18px 22px;
+  font-size: 14px;
   color: var(--muted);
   border-top: 1px solid var(--line);
 }
 
-/* tab behavior */
+/* TAB BEHAVIOR */
 .section{ display: none; }
 .section.active{ display: block; }
 
-/* mobile */
-@media (max-width: 900px){
-  .layout{ grid-template-columns: 1fr; }
-  .sidebar{ position: static; }
+/* MOBILE */
+@media (max-width: 1100px){
+  .layout{
+    grid-template-columns: 1fr;
+  }
+  .sidebar{
+    position: static;
+  }
+  .wrap{
+    padding: 20px;
+  }
 }
