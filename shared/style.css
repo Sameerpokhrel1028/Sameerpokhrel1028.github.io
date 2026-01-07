@@ -173,9 +173,17 @@ a:hover{ text-decoration: underline; }
   border-top: 1px solid var(--line);
 }
 
-/* TAB BEHAVIOR */
-.section{ display: none; }
-.section.active{ display: block; }
+/* TAB BEHAVIOR (FIXED)
+   - Default: hide sections (for tabs)
+   - Show: section with .active
+   - Failsafe: if none are .active, show the first section in .main
+*/
+.main .section{ display: none; }
+.main .section.active{ display: block; }
+.main .section:first-of-type{ display: block; }
+
+/* If an active section exists, override the failsafe */
+.main .section.active ~ .section:first-of-type{ display: none; }
 
 /* MOBILE */
 @media (max-width: 1100px){
@@ -189,5 +197,3 @@ a:hover{ text-decoration: underline; }
     padding: 20px;
   }
 }
-
-
