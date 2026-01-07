@@ -1,333 +1,455 @@
-<!doctype html>
-<html lang="en">
-<head>
+@@ -4,195 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sameer Pokhrel</title>
+  <meta name="description" content="Sameer Pokhrel — Plant breeding & genomics. Research, publications, experience, and contact." />
+  <meta name="description" content="Sameer Pokhrel — PhD Researcher in Plant Breeding & Genomics" />
 
   <style>
     :root{
+      --max: 1100px;
       --bg: #ffffff;
       --text: #111;
-      --muted: #555;
-      --line: #e5e5e5;
+      --muted: #5b5b5b;
+      --line: #e9e9e9;
       --card: #fafafa;
-      --radius: 18px;
-      --shadow: 0 8px 22px rgba(0,0,0,.06);
+      --radius: 16px;
+      --shadow: 0 6px 18px rgba(0,0,0,.06);
     }
-
     *{ box-sizing: border-box; }
-
+    html{ scroll-behavior: smooth; }
     body{
       margin:0;
       background: var(--bg);
       color: var(--text);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      line-height: 1.75;
-      font-size: 17px;
+      line-height: 1.6;
     }
-
-    a{ color: inherit; text-decoration: none; }
+    a{ color: inherit; }
     a:hover{ text-decoration: underline; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 24px 16px; }
 
-    /* FULL WIDTH */
-    .wrap{
-      width: 100%;
-      max-width: none;
-      margin: 0;
-      padding: 32px 40px;
-    }
-
-    /* LAYOUT */
     .layout{
       display: grid;
-      grid-template-columns: 420px 1fr;
-      gap: 36px;
+      grid-template-columns: 320px 1fr;
+      gap: 18px;
       align-items: start;
     }
-
-    /* SIDEBAR */
-    .sidebar{
-      position: sticky;
-      top: 32px;
+    @media (max-width: 900px){
+      .layout{ grid-template-columns: 1fr; }
+      .sidebar{ position: static !important; }
+      .topnav{ position: static !important; }
     }
 
+    /* Sidebar */
+    .sidebar{ position: sticky; top: 16px; }
     .card{
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--card);
-      padding: 22px;
+      padding: 18px;
       box-shadow: var(--shadow);
     }
-
-    .profile{ display: grid; gap: 16px; }
-
+    .profile{ display: grid; gap: 12px; }
     .avatar{
-      width: 170px;
-      height: 170px;
+      width: 112px;
+      height: 112px;
       border-radius: 50%;
       object-fit: cover;
       border: 1px solid var(--line);
       background: #fff;
     }
+    .name{ font-size: 26px; font-weight: 800; margin: 0; line-height: 1.15; }
+    .role{ margin: 4px 0 0 0; color: var(--muted); font-weight: 650; font-size: 14px; }
+    .meta{ display: grid; gap: 8px; margin-top: 10px; color: var(--muted); font-size: 14px; }
+    .meta div{ display:flex; gap: 10px; align-items: baseline; }
+    .label{ width: 76px; color:#333; font-weight: 700; }
 
-    .name{
-      font-size: 30px;
-      font-weight: 800;
-      margin: 0;
-    }
-
-    .role{
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 16px;
-    }
-
-    .meta{
-      font-size: 15px;
-      color: var(--muted);
-    }
-
-    .meta div{ margin-top: 6px; }
-
-    .iconrow{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
+    .iconrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
     .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
       border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 8px 14px;
       background: #fff;
-      font-size: 14px;
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 13px;
       font-weight: 700;
+      text-decoration: none;
     }
+    .pill:hover{ border-color:#bbb; text-decoration:none; }
+    .ico{ width:16px; height:16px; display:inline-block; }
+    .smallnote{ margin: 12px 0 0 0; color: var(--muted); font-size: 13px; }
 
-    .smallnote{
-      font-size: 14px;
-      color: var(--muted);
-      margin-top: 14px;
-    }
-
-    /* MAIN */
+    /* Main */
     .main{
       border: 1px solid var(--line);
       border-radius: var(--radius);
+      overflow: hidden;
       background: #fff;
       box-shadow: var(--shadow);
-      overflow: hidden;
     }
-
-    /* TOP NAV */
     .topnav{
-      display: flex;
-      gap: 14px;
-      padding: 18px 22px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 14px 16px;
       border-bottom: 1px solid var(--line);
       background: #fff;
-      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 5;
     }
-
     .topnav a{
       border: 1px solid var(--line);
-      padding: 10px 16px;
-      border-radius: 14px;
+      padding: 8px 10px;
+      border-radius: 12px;
       background: var(--card);
-      font-weight: 700;
-      font-size: 15px;
+      font-weight: 750;
+      font-size: 13px;
+      text-decoration: none;
     }
-
+    .topnav a:hover{ border-color:#bbb; }
     .topnav a.active{
       border-color: #111;
       background: #fff;
     }
 
-    /* CONTENT */
-    .section{
-      padding: 28px 26px;
-    }
+    .section{ padding: 18px 16px; border-bottom: 1px solid var(--line); scroll-margin-top: 76px; }
+    .section:last-child{ border-bottom: none; }
+    h2{ margin: 0 0 10px 0; font-size: 20px; }
+    p{ margin: 10px 0; }
+    ul{ margin: 10px 0 0 18px; }
+    .muted{ color: var(--muted); }
 
-    .section h2{
-      font-size: 24px;
-      margin-top: 0;
-      margin-bottom: 14px;
+    /* Project grid */
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
     }
+    @media (max-width: 900px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px){ .grid{ grid-template-columns: 1fr; } }
 
-    .item{
+    .thumb{
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px 18px;
-      margin-top: 14px;
-      background: var(--card);
-    }
-
-    .item .title{
-      font-weight: 800;
-      font-size: 18px;
-    }
-
-    .item .when{
-      font-size: 14px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    /* FOOTER */
-    .footer{
-      padding: 18px 22px;
-      font-size: 14px;
-      color: var(--muted);
-      border-top: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
       background: #fff;
     }
+    .thumb img{ width:100%; height:150px; object-fit: cover; display:block; }
+    .thumb .cap{ padding: 10px; font-size: 13px; color: var(--muted); }
 
-    /* ✅ TAB BEHAVIOR (ROBUST)
-       - Without JS: show all sections (never blank)
-       - With JS: hide all, show only .active
-    */
-    html.js .main .section{ display: none; }
-    html.js .main .section.active{ display: block; }
+    /* Resume items */
+    .item{
+      padding: 12px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      margin-top: 10px;
+    }
+    .item .title{ font-weight: 850; margin: 0; }
+    .item .when{ color: var(--muted); font-size: 13px; margin: 4px 0 0 0; }
+    .item .desc{ margin: 8px 0 0 0; color: #222; }
 
-    /* MOBILE */
-    @media (max-width: 1100px){
-      .layout{
-        grid-template-columns: 1fr;
-      }
-      .sidebar{
-        position: static;
-      }
-      .wrap{
-        padding: 20px;
-      }
+    /* CV embed */
+    .cvbar{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 10px 0 12px;
+      flex-wrap: wrap;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .btn:hover{ border-color:#bbb; text-decoration:none; }
+    .pdf{
+      width: 100%;
+      height: 720px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+    @media (max-width: 900px){ .pdf{ height: 560px; } }
+
+    .footer{
+      padding: 14px 16px;
+      color: var(--muted);
+      font-size: 13px;
+      background: #fff;
+      border-top: 1px solid var(--line);
     }
   </style>
-
-  <script>
-    // Enable "JS mode" for tab CSS
-    document.documentElement.classList.add('js');
-  </script>
+  <!-- Shared styles & scripts -->
+  <link rel="stylesheet" href="/shared/style.css">
+  <script src="/shared/site.js" defer></script>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="layout">
-
+@@ -202,8 +18,7 @@
+      <!-- SIDEBAR -->
       <aside class="sidebar">
         <div class="card profile">
-          <!-- Replace with your image path if you have one -->
-          <img class="avatar" src="assets/profile.jpg" alt="Profile photo" onerror="this.style.display='none'">
+          <!-- Put your photo in: assets/profile.jpg -->
+          <img class="avatar" src="assets/profile.jpg" alt="Sameer Pokhrel">
+          <img class="avatar" src="/assets/profile.jpg" alt="Sameer Pokhrel">
 
           <div>
             <h1 class="name">Sameer Pokhrel</h1>
-            <div class="role">PhD Researcher | Plant Breeding &amp; Genomics<br/>University of Georgia</div>
+@@ -212,204 +27,78 @@ <h1 class="name">Sameer Pokhrel</h1>
+          </div>
 
-            <div class="meta" style="margin-top:12px;">
-              <div>Email: sameer.pokhrel@uga.edu</div>
-              <div>Location: Georgia, USA</div>
+          <div class="meta">
+            <div><span class="label">Email</span><span class="muted"><a href="mailto:your.email@uga.edu">your.email@uga.edu</a></span></div>
+            <div><span class="label">Location</span><span class="muted">Georgia, USA</span></div>
+            <div>
+              <span class="label">Email</span>
+              <span class="muted">
+                <a href="mailto:sameer.pokhrel@uga.edu">sameer.pokhrel@uga.edu</a>
+              </span>
             </div>
-
-            <div class="iconrow">
-              <a class="pill" href="#" target="_blank" rel="noopener">Google Scholar</a>
-              <a class="pill" href="#" target="_blank" rel="noopener">GitHub</a>
-              <a class="pill" href="#" target="_blank" rel="noopener">LinkedIn</a>
-              <a class="pill" href="#" target="_blank" rel="noopener">ResearchGate</a>
-            </div>
-
-            <div class="smallnote">
-              Quick links: <a href="assets/CV.pdf" target="_blank" rel="noopener">CV (PDF)</a> ·
-              <a href="#" target="_blank" rel="noopener">Shiny App</a>
+            <div>
+              <span class="label">Location</span>
+              <span class="muted">Georgia, USA</span>
             </div>
           </div>
+
+          <div class="iconrow">
+            <a class="pill" href="https://scholar.google.com/" target="_blank" rel="noopener">
+              <span class="ico" aria-hidden="true">
+                <!-- simple "cap" icon -->
+                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3Zm0 12L3 11v6l9 4 9-4v-6l-9 4Z"/></svg>
+              </span>
+            <a class="pill"
+               href="https://scholar.google.com/citations?user=AEdXNxkAAAAJ&hl=en&oi=ao"
+               target="_blank" rel="noopener">
+              Google Scholar
+            </a>
+
+            <a class="pill" href="https://github.com/Sameerpokhrel1028" target="_blank" rel="noopener">
+              <span class="ico" aria-hidden="true">
+                <!-- octocat-ish icon -->
+                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.35-3.88-1.35-.53-1.35-1.28-1.71-1.28-1.71-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.27 3.36.97.1-.75.4-1.27.72-1.56-2.55-.3-5.24-1.3-5.24-5.76 0-1.27.45-2.31 1.2-3.13-.12-.3-.52-1.52.12-3.16 0 0 .98-.32 3.2 1.2a10.9 10.9 0 0 1 5.82 0c2.22-1.52 3.2-1.2 3.2-1.2.64 1.64.24 2.86.12 3.16.75.82 1.2 1.86 1.2 3.13 0 4.47-2.7 5.46-5.26 5.75.41.36.78 1.08.78 2.18v3.23c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+              </span>
+            <a class="pill"
+               href="https://github.com/Sameerpokhrel1028"
+               target="_blank" rel="noopener">
+              GitHub
+            </a>
+
+            <a class="pill" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+              <span class="ico" aria-hidden="true">
+                <!-- LinkedIn-ish icon -->
+                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 9h4v12H3V9Zm7 0h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.66 4.78 6.12V21h-4v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.96V21h-4V9Z"/></svg>
+              </span>
+            <a class="pill"
+               href="https://www.linkedin.com/in/sameer-pokhrel"
+               target="_blank" rel="noopener">
+              LinkedIn
+            </a>
+
+            <a class="pill" href="https://www.researchgate.net/" target="_blank" rel="noopener">
+              <span class="ico" aria-hidden="true">
+                <!-- simple RG-ish icon -->
+                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M4 20V4h9.2c3.2 0 5.3 1.9 5.3 4.8 0 2-1 3.6-2.8 4.3L20 20h-4.4l-3.6-5.6H8.2V20H4Zm4.2-9h4.7c1.2 0 2-.7 2-1.8S14 7.4 12.9 7.4H8.2V11Z"/></svg>
+              </span>
+            <a class="pill"
+               href="https://www.researchgate.net/profile/Sameer-Pokhrel-2"
+               target="_blank" rel="noopener">
+              ResearchGate
+            </a>
+          </div>
+
+          <p class="smallnote">
+            Quick links:
+            <a href="#cv">CV</a> ·
+            <a href="#contact">Contact</a> ·
+            <a href="https://sameerpokhrel.shinyapps.io/shinyapp1kbvariants/" target="_blank" rel="noopener">Shiny App</a>
+            <a href="/CV.pdf" target="_blank" rel="noopener">CV (PDF)</a> ·
+            <a href="https://sameerpokhrel.shinyapps.io/shinyapp1kbvariants/" target="_blank" rel="noopener">
+              Shiny App
+            </a>
+          </p>
         </div>
       </aside>
 
+      <!-- MAIN -->
+      <!-- MAIN CONTENT -->
       <main class="main">
         <nav class="topnav" id="topnav">
-          <a href="#about" data-tab="about" class="active">About</a>
-          <a href="#research" data-tab="research">Research</a>
-          <a href="#publications" data-tab="publications">Publications</a>
-          <a href="#contact" data-tab="contact">Contact</a>
+          <a href="#about" class="navlink active">About</a>
+          <a href="#projects" class="navlink">Research Projects</a>
+          <a href="#resume" class="navlink">Resume</a>
+          <a href="#publications" class="navlink">Publications</a>
+          <a href="#cv" class="navlink">CV</a>
+          <a href="#contact" class="navlink">Contact</a>
         </nav>
 
-        <!-- IMPORTANT: ids must match data-tab values -->
-        <section id="about" class="section active">
+        <section id="about" class="section">
           <h2>About</h2>
           <p>
-            Write your about content here.
+            I work on peanut (<i>Arachis hypogaea</i>) breeding and genomics with an emphasis on
+            pangenomes, introgression detection, and trait mapping for drought tolerance and disease resistance.
+          </p>
+          <p class="muted">
+            I build reproducible bioinformatics pipelines (HPC + R/Python) and interactive visualization tools
+            for genome-wide variant density and genome clustering.
           </p>
         </section>
 
-        <section id="research" class="section">
-          <h2>Research</h2>
-          <div class="item">
-            <div class="title">Drought tolerance breeding in peanut</div>
-            <div class="when">Breeding · Genomics · Field phenotyping</div>
+        <section id="projects" class="section">
+          <h2>Research Projects</h2>
+          <p class="muted">Replace the images/titles below with your real figures or screenshots.</p>
+
+          <div class="grid">
+            <div class="thumb">
+              <img src="assets/project_pangenome.jpg" alt="Peanut pangenome">
+              <div class="cap">Peanut pangenome graph construction and variant projection</div>
+            </div>
+            <div class="thumb">
+              <img src="assets/project_introgression.jpg" alt="Introgression">
+              <div class="cap">Introgression detection and region-level variant profiling</div>
+            </div>
+            <div class="thumb">
+              <img src="assets/project_shiny.jpg" alt="Shiny app">
+              <div class="cap">Shiny app for variant density heatmaps and genome clustering</div>
+            </div>
           </div>
+
+          <p style="margin-top:12px;">
+            Live app:
+            <a href="https://sameerpokhrel.shinyapps.io/shinyapp1kbvariants/" target="_blank" rel="noopener">
+              Variant Density Explorer
+            </a>
+          </p>
+        </section>
+
+        <section id="resume" class="section">
+          <h2>Resume</h2>
+
           <div class="item">
-            <div class="title">White mold resistance breeding</div>
-            <div class="when">Disease resistance · QTL/GWAS</div>
+            <p class="title">Graduate Research Assistant — University of Georgia</p>
+            <p class="when">2022 – Present</p>
+            <p class="desc">
+              Peanut genetics and breeding, pangenome/graph genomics, trait mapping, and pipeline development.
+            </p>
+          </div>
+
+          <div class="item">
+            <p class="title">Graduate Researcher — University of Florida</p>
+            <p class="when">2019 – 2022</p>
+            <p class="desc">
+              Plant genetics research, experimental design, data analysis, and scientific communication.
+            </p>
+          </div>
+
+          <div class="item">
+            <p class="title">Awards & Highlights</p>
+            <p class="when">Selected</p>
+            <p class="desc">
+              Add scholarships, travel awards, and notable achievements here (short bullets work best).
+            </p>
           </div>
         </section>
 
         <section id="publications" class="section">
           <h2>Publications</h2>
-          <div class="item">
-            <div class="title">Your paper title</div>
-            <div class="when">Journal / Preprint · Year</div>
-          </div>
+          <p class="muted">Keep this short; link out to Google Scholar for the full list.</p>
+          <ul>
+            <li>Author(s). Year. Title. Journal. (link)</li>
+            <li>Author(s). Year. Title. Journal/Preprint. (link)</li>
+            <li>Author(s). Year. Title. Journal. (link)</li>
+          </ul>
+          <p style="margin-top:10px;">
+            Full list:
+            <a href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a>
+          </p>
         </section>
+
+        <section id="cv" class="section">
+          <h2>CV</h2>
+
+          <div class="cvbar">
+            <div class="muted">
+              Upload your CV as <b>CV.pdf</b> in the repo root (same folder as index.html).
+            </div>
+            <a class="btn" href="CV.pdf" target="_blank" rel="noopener">
+              <span class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 3v10.2l3.2-3.2 1.4 1.4L12 16.9 7.4 11.4l1.4-1.4 3.2 3.2V3h0ZM5 19h14v2H5v-2Z"/></svg>
+              </span>
+              Download CV
+            </a>
+          </div>
+
+          <!-- Embedded PDF viewer -->
+          <iframe class="pdf" src="CV.pdf" title="CV PDF viewer"></iframe>
+
+          <p class="muted" style="margin-top:10px;">
+            If the embedded preview does not load on some devices, use the Download button above.
+          </p>
+        </section>
+        <!-- TOP NAV (TAB STYLE) -->
+        <nav class="topnav">
+          <a href="#about" class="navlink active" data-tab="about">About</a>
+          <a href="#projects" class="navlink" data-tab="projects">Research</a>
+          <a href="#resume" class="navlink" data-tab="resume">Resume</a>
+          <a href="#publications" class="navlink" data-tab="publications">Publications</a>
+          <a href="#contact" class="navlink" data-tab="contact">Contact</a>
+        </nav>
 
         <section id="contact" class="section">
           <h2>Contact</h2>
-          <p>Email: sameer.pokhrel@uga.edu</p>
+          <p>Email: <a href="mailto:your.email@uga.edu">your.email@uga.edu</a></p>
+          <p class="muted">You can also reach me via LinkedIn.</p>
         </section>
+        <!-- CONTENT LOADER -->
+        <div id="content" class="section active" style="padding: 18px 16px;">
+          <!-- JS loads content/about.html, etc. here -->
+        </div>
 
         <div class="footer">
-          © 2026 Sameer Pokhrel · Built with GitHub Pages
+          © <span id="y"></span> Sameer Pokhrel · Built with GitHub Pages
         </div>
+
       </main>
 
     </div>
   </div>
 
   <script>
-    (function(){
-      const nav = document.getElementById('topnav');
-      const links = Array.from(nav.querySelectorAll('a[data-tab]'));
-      const sections = Array.from(document.querySelectorAll('.main .section'));
+    document.getElementById("y").textContent = new Date().getFullYear();
 
-      function setActive(tabId){
-        // If a bad hash/unknown tab is requested, fall back to first link
-        const exists = sections.some(s => s.id === tabId);
-        if(!exists) tabId = links[0].dataset.tab;
+    // Active nav highlighting on scroll
+    const links = Array.from(document.querySelectorAll(".navlink"));
+    const sections = links
+      .map(a => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
 
-        links.forEach(a => a.classList.toggle('active', a.dataset.tab === tabId));
-        sections.forEach(s => s.classList.toggle('active', s.id === tabId));
-      }
+    const setActive = (id) => {
+      links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+    };
 
-      // Click handling
-      links.forEach(a => {
-        a.addEventListener('click', (e) => {
-          e.preventDefault();
-          const tabId = a.dataset.tab;
-          history.replaceState(null, '', '#' + tabId);
-          setActive(tabId);
-        });
-      });
+    const observer = new IntersectionObserver((entries) => {
+      // pick the most visible section in view
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActive(visible.target.id);
+    }, { root: null, threshold: [0.25, 0.5, 0.75] });
 
-      // Load initial tab from hash (or default)
-      const initial = (location.hash || '').replace('#','') || links[0].dataset.tab;
-      setActive(initial);
-
-      // React to manual hash changes
-      window.addEventListener('hashchange', () => {
-        const tabId = (location.hash || '').replace('#','');
-        setActive(tabId);
-      });
-    })();
+    sections.forEach(sec => observer.observe(sec));
   </script>
 </body>
 </html>
