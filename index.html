@@ -4,101 +4,330 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sameer Pokhrel</title>
-  <meta name="description" content="Sameer Pokhrel — PhD Researcher in Plant Breeding & Genomics" />
 
-  <!-- Shared styles & scripts -->
-  <link rel="stylesheet" href="/shared/style.css">
-  <script src="/shared/site.js" defer></script>
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #111;
+      --muted: #555;
+      --line: #e5e5e5;
+      --card: #fafafa;
+      --radius: 18px;
+      --shadow: 0 8px 22px rgba(0,0,0,.06);
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.75;
+      font-size: 17px;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    /* FULL WIDTH */
+    .wrap{
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 32px 40px;
+    }
+
+    /* LAYOUT */
+    .layout{
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    /* SIDEBAR */
+    .sidebar{
+      position: sticky;
+      top: 32px;
+    }
+
+    .card{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .profile{ display: grid; gap: 16px; }
+
+    .avatar{
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .name{
+      font-size: 30px;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .role{
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .meta{
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .meta div{ margin-top: 6px; }
+
+    .iconrow{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .pill{
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 14px;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .smallnote{
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 14px;
+    }
+
+    /* MAIN */
+    .main{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    /* TOP NAV */
+    .topnav{
+      display: flex;
+      gap: 14px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+      flex-wrap: wrap;
+    }
+
+    .topnav a{
+      border: 1px solid var(--line);
+      padding: 10px 16px;
+      border-radius: 14px;
+      background: var(--card);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .topnav a.active{
+      border-color: #111;
+      background: #fff;
+    }
+
+    /* CONTENT */
+    .section{
+      padding: 28px 26px;
+    }
+
+    .section h2{
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 14px;
+    }
+
+    .item{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin-top: 14px;
+      background: var(--card);
+    }
+
+    .item .title{
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .item .when{
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* FOOTER */
+    .footer{
+      padding: 18px 22px;
+      font-size: 14px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    /* ✅ TAB BEHAVIOR (ROBUST)
+       - Without JS: show all sections (never blank)
+       - With JS: hide all, show only .active
+    */
+    html.js .main .section{ display: none; }
+    html.js .main .section.active{ display: block; }
+
+    /* MOBILE */
+    @media (max-width: 1100px){
+      .layout{
+        grid-template-columns: 1fr;
+      }
+      .sidebar{
+        position: static;
+      }
+      .wrap{
+        padding: 20px;
+      }
+    }
+  </style>
+
+  <script>
+    // Enable "JS mode" for tab CSS
+    document.documentElement.classList.add('js');
+  </script>
 </head>
 
 <body>
   <div class="wrap">
     <div class="layout">
 
-      <!-- SIDEBAR -->
       <aside class="sidebar">
         <div class="card profile">
-          <img class="avatar" src="/assets/profile.jpg" alt="Sameer Pokhrel">
+          <!-- Replace with your image path if you have one -->
+          <img class="avatar" src="assets/profile.jpg" alt="Profile photo" onerror="this.style.display='none'">
 
           <div>
             <h1 class="name">Sameer Pokhrel</h1>
-            <div class="role">PhD Researcher | Plant Breeding & Genomics</div>
-            <div class="role">University of Georgia</div>
-          </div>
+            <div class="role">PhD Researcher | Plant Breeding &amp; Genomics<br/>University of Georgia</div>
 
-          <div class="meta">
-            <div>
-              <span class="label">Email</span>
-              <span class="muted">
-                <a href="mailto:sameer.pokhrel@uga.edu">sameer.pokhrel@uga.edu</a>
-              </span>
+            <div class="meta" style="margin-top:12px;">
+              <div>Email: sameer.pokhrel@uga.edu</div>
+              <div>Location: Georgia, USA</div>
             </div>
-            <div>
-              <span class="label">Location</span>
-              <span class="muted">Georgia, USA</span>
+
+            <div class="iconrow">
+              <a class="pill" href="#" target="_blank" rel="noopener">Google Scholar</a>
+              <a class="pill" href="#" target="_blank" rel="noopener">GitHub</a>
+              <a class="pill" href="#" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="pill" href="#" target="_blank" rel="noopener">ResearchGate</a>
+            </div>
+
+            <div class="smallnote">
+              Quick links: <a href="assets/CV.pdf" target="_blank" rel="noopener">CV (PDF)</a> ·
+              <a href="#" target="_blank" rel="noopener">Shiny App</a>
             </div>
           </div>
-
-          <div class="iconrow">
-            <a class="pill"
-               href="https://scholar.google.com/citations?user=AEdXNxkAAAAJ&hl=en&oi=ao"
-               target="_blank" rel="noopener">
-              Google Scholar
-            </a>
-
-            <a class="pill"
-               href="https://github.com/Sameerpokhrel1028"
-               target="_blank" rel="noopener">
-              GitHub
-            </a>
-
-            <a class="pill"
-               href="https://www.linkedin.com/in/sameer-pokhrel"
-               target="_blank" rel="noopener">
-              LinkedIn
-            </a>
-
-            <a class="pill"
-               href="https://www.researchgate.net/profile/Sameer-Pokhrel-2"
-               target="_blank" rel="noopener">
-              ResearchGate
-            </a>
-          </div>
-
-          <p class="smallnote">
-            Quick links:
-            <a href="/CV.pdf" target="_blank" rel="noopener">CV (PDF)</a> ·
-            <a href="https://sameerpokhrel.shinyapps.io/shinyapp1kbvariants/" target="_blank" rel="noopener">
-              Shiny App
-            </a>
-          </p>
         </div>
       </aside>
 
-      <!-- MAIN CONTENT -->
       <main class="main">
-
-        <!-- TOP NAV (TAB STYLE) -->
-        <nav class="topnav">
-          <a href="#about" class="navlink active" data-tab="about">About</a>
-          <a href="#projects" class="navlink" data-tab="projects">Research</a>
-          <a href="#resume" class="navlink" data-tab="resume">Resume</a>
-          <a href="#publications" class="navlink" data-tab="publications">Publications</a>
-          <a href="#contact" class="navlink" data-tab="contact">Contact</a>
+        <nav class="topnav" id="topnav">
+          <a href="#about" data-tab="about" class="active">About</a>
+          <a href="#research" data-tab="research">Research</a>
+          <a href="#publications" data-tab="publications">Publications</a>
+          <a href="#contact" data-tab="contact">Contact</a>
         </nav>
 
-        <!-- CONTENT LOADER -->
-        <div id="content" class="section active" style="padding: 18px 16px;">
-          <!-- JS loads content/about.html, etc. here -->
-        </div>
+        <!-- IMPORTANT: ids must match data-tab values -->
+        <section id="about" class="section active">
+          <h2>About</h2>
+          <p>
+            Write your about content here.
+          </p>
+        </section>
+
+        <section id="research" class="section">
+          <h2>Research</h2>
+          <div class="item">
+            <div class="title">Drought tolerance breeding in peanut</div>
+            <div class="when">Breeding · Genomics · Field phenotyping</div>
+          </div>
+          <div class="item">
+            <div class="title">White mold resistance breeding</div>
+            <div class="when">Disease resistance · QTL/GWAS</div>
+          </div>
+        </section>
+
+        <section id="publications" class="section">
+          <h2>Publications</h2>
+          <div class="item">
+            <div class="title">Your paper title</div>
+            <div class="when">Journal / Preprint · Year</div>
+          </div>
+        </section>
+
+        <section id="contact" class="section">
+          <h2>Contact</h2>
+          <p>Email: sameer.pokhrel@uga.edu</p>
+        </section>
 
         <div class="footer">
-          © <span id="y"></span> Sameer Pokhrel · Built with GitHub Pages
+          © 2026 Sameer Pokhrel · Built with GitHub Pages
         </div>
-
       </main>
 
     </div>
   </div>
+
+  <script>
+    (function(){
+      const nav = document.getElementById('topnav');
+      const links = Array.from(nav.querySelectorAll('a[data-tab]'));
+      const sections = Array.from(document.querySelectorAll('.main .section'));
+
+      function setActive(tabId){
+        // If a bad hash/unknown tab is requested, fall back to first link
+        const exists = sections.some(s => s.id === tabId);
+        if(!exists) tabId = links[0].dataset.tab;
+
+        links.forEach(a => a.classList.toggle('active', a.dataset.tab === tabId));
+        sections.forEach(s => s.classList.toggle('active', s.id === tabId));
+      }
+
+      // Click handling
+      links.forEach(a => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          const tabId = a.dataset.tab;
+          history.replaceState(null, '', '#' + tabId);
+          setActive(tabId);
+        });
+      });
+
+      // Load initial tab from hash (or default)
+      const initial = (location.hash || '').replace('#','') || links[0].dataset.tab;
+      setActive(initial);
+
+      // React to manual hash changes
+      window.addEventListener('hashchange', () => {
+        const tabId = (location.hash || '').replace('#','');
+        setActive(tabId);
+      });
+    })();
+  </script>
 </body>
 </html>
