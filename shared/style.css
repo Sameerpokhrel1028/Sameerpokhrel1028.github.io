@@ -189,20 +189,5 @@ a:hover{ text-decoration: underline; }
     padding: 20px;
   }
 }
-/* =========================
-   FORCE UNIFORM IMAGE SIZE
-   ========================= */
 
-.thumb{
-  display: flex;
-  flex-direction: column;
-}
-
-.thumb img{
-  width: 100% !important;
-  height: 240px !important;   /* ← change once, affects all */
-  object-fit: cover !important;
-  object-position: center;
-  flex-shrink: 0;
-}
 
