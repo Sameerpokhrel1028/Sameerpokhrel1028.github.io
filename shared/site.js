@@ -1,55 +1,58 @@
-// shared/site.js
 document.addEventListener("DOMContentLoaded", () => {
+  const content = document.getElementById("content");
+  const links = Array.from(document.querySelectorAll(".topnav .navlink"));
+
   // footer year
   const y = document.getElementById("y");
   if (y) y.textContent = new Date().getFullYear();
 
-  const nav = document.querySelector(".topnav");
-  if (!nav) return;
+  async function loadPage(link, pushHash = true) {
+    const page = link.dataset.page;
+    if (!page) return;
 
-  const links = Array.from(nav.querySelectorAll("a.navlink"));
-  const sections = Array.from(document.querySelectorAll("main .section"));
+    // active tab highlight
+    links.forEach(a => a.classList.toggle("active", a === link));
 
-  // If your footer uses .footer, ensure it's not treated as a "section"
-  // (it isn't, unless you gave it class="section")
+    try {
+      const res = await fetch(page, { cache: "no-cache" });
+      if (!res.ok) throw new Error(`Failed to load ${page}`);
+      const html = await res.text();
+      content.innerHTML = html;
 
-  function activate(id, updateHash = true) {
-    // activate section
-    sections.forEach(sec => sec.classList.toggle("active", sec.id === id));
+      // update URL hash
+      if (pushHash) {
+        const hash = link.getAttribute("href") || "#about";
+        history.replaceState(null, "", hash);
+      }
 
-    // activate nav link
-    links.forEach(a => {
-      const target = (a.getAttribute("href") || "").replace("#", "");
-      a.classList.toggle("active", target === id);
-    });
-
-    if (updateHash) {
-      history.replaceState(null, "", `#${id}`);
+      // feel like "new page"
+      window.scrollTo({ top: 0 });
+    } catch (err) {
+      content.innerHTML = `
+        <h2>Page failed to load</h2>
+        <p class="muted">Could not load: <b>${page}</b></p>
+      `;
+      console.error(err);
     }
   }
 
-  // click handling
-  links.forEach(a => {
-    a.addEventListener("click", (e) => {
-      const href = a.getAttribute("href") || "";
-      if (!href.startsWith("#")) return;
+  // click events
+  links.forEach(link => {
+    link.addEventListener("click", (e) => {
       e.preventDefault();
-      const id = href.slice(1);
-      activate(id, true);
+      loadPage(link, true);
     });
   });
 
-  // initial tab
-  const hashId = (location.hash || "").replace("#", "");
-  const defaultId =
-    (hashId && document.getElementById(hashId) ? hashId : null) ||
-    (sections[0] ? sections[0].id : null);
+  // initial load based on hash
+  const hash = (location.hash || "#about").toLowerCase();
+  const match = links.find(a => (a.getAttribute("href") || "").toLowerCase() === hash) || links[0];
+  loadPage(match, false);
 
-  if (defaultId) activate(defaultId, false);
-
-  // if user changes hash manually
+  // handle manual hash changes
   window.addEventListener("hashchange", () => {
-    const id = (location.hash || "").replace("#", "");
-    if (id && document.getElementById(id)) activate(id, false);
+    const h = (location.hash || "#about").toLowerCase();
+    const m = links.find(a => (a.getAttribute("href") || "").toLowerCase() === h) || links[0];
+    loadPage(m, false);
   });
 });
