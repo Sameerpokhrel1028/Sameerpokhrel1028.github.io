@@ -2,197 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sameer Pokhrel</title>
-  <meta name="description" content="Sameer Pokhrel — PhD Researcher in Plant Breeding & Genomics. Research, publications, experience, and contact." />
+  <meta name="description" content="Sameer Pokhrel — Plant breeding & genomics. Research, publications, experience, and contact." />
 
-  <style>
-    :root{
-      --max: 1100px;
-      --bg: #ffffff;
-      --text: #111;
-      --muted: #5b5b5b;
-      --line: #e9e9e9;
-      --card: #fafafa;
-      --radius: 16px;
-      --shadow: 0 6px 18px rgba(0,0,0,.06);
-    }
-    *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
-    body{
-      margin:0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      line-height: 1.6;
-    }
-    a{ color: inherit; }
-    a:hover{ text-decoration: underline; }
-    .wrap{ max-width: var(--max); margin: 0 auto; padding: 24px 16px; }
-
-    .layout{
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 18px;
-      align-items: start;
-    }
-    @media (max-width: 900px){
-      .layout{ grid-template-columns: 1fr; }
-      .sidebar{ position: static !important; }
-      .topnav{ position: static !important; }
-    }
-
-    /* Sidebar */
-    .sidebar{ position: sticky; top: 16px; }
-    .card{
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--card);
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-    .profile{ display: grid; gap: 12px; }
-    .avatar{
-      width: 112px;
-      height: 112px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid var(--line);
-      background: #fff;
-    }
-    .name{ font-size: 26px; font-weight: 800; margin: 0; line-height: 1.15; }
-    .role{ margin: 4px 0 0 0; color: var(--muted); font-weight: 650; font-size: 14px; }
-    .meta{ display: grid; gap: 8px; margin-top: 10px; color: var(--muted); font-size: 14px; }
-    .meta div{ display:flex; gap: 10px; align-items: baseline; }
-    .label{ width: 76px; color:#333; font-weight: 700; }
-
-    .iconrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      border: 1px solid var(--line);
-      background: #fff;
-      border-radius: 999px;
-      padding: 8px 10px;
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
-    }
-    .pill:hover{ border-color:#bbb; text-decoration:none; }
-    .ico{ width:16px; height:16px; display:inline-block; }
-    .smallnote{ margin: 12px 0 0 0; color: var(--muted); font-size: 13px; }
-
-    /* Main */
-    .main{
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: #fff;
-      box-shadow: var(--shadow);
-    }
-    .topnav{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--line);
-      background: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 5;
-    }
-    .topnav a{
-      border: 1px solid var(--line);
-      padding: 8px 10px;
-      border-radius: 12px;
-      background: var(--card);
-      font-weight: 750;
-      font-size: 13px;
-      text-decoration: none;
-    }
-    .topnav a:hover{ border-color:#bbb; }
-    .topnav a.active{
-      border-color: #111;
-      background: #fff;
-    }
-
-    .section{ padding: 18px 16px; border-bottom: 1px solid var(--line); scroll-margin-top: 76px; }
-    .section:last-child{ border-bottom: none; }
-    h2{ margin: 0 0 10px 0; font-size: 20px; }
-    p{ margin: 10px 0; }
-    ul{ margin: 10px 0 0 18px; }
-    .muted{ color: var(--muted); }
-
-    /* Project grid */
-    .grid{
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 12px;
-    }
-    @media (max-width: 900px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 520px){ .grid{ grid-template-columns: 1fr; } }
-
-    .thumb{
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      overflow: hidden;
-      background: #fff;
-    }
-    .thumb img{ width:100%; height:150px; object-fit: cover; display:block; }
-    .thumb .cap{ padding: 10px; font-size: 13px; color: var(--muted); }
-
-    /* Resume items */
-    .item{
-      padding: 12px 12px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--card);
-      margin-top: 10px;
-    }
-    .item .title{ font-weight: 850; margin: 0; }
-    .item .when{ color: var(--muted); font-size: 13px; margin: 4px 0 0 0; }
-    .item .desc{ margin: 8px 0 0 0; color: #222; }
-
-    /* CV embed */
-    .cvbar{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap: 10px;
-      margin: 10px 0 12px;
-      flex-wrap: wrap;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: #fff;
-      font-weight: 800;
-      text-decoration: none;
-    }
-    .btn:hover{ border-color:#bbb; text-decoration:none; }
-    .pdf{
-      width: 100%;
-      height: 720px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #fff;
-    }
-    @media (max-width: 900px){ .pdf{ height: 560px; } }
-
-    .footer{
-      padding: 14px 16px;
-      color: var(--muted);
-      font-size: 13px;
-      background: #fff;
-      border-top: 1px solid var(--line);
-    }
-  </style>
+  <!-- IMPORTANT: use RELATIVE paths for GitHub Pages repo sites -->
+  <link rel="stylesheet" href="shared/style.css">
+  <script src="shared/site.js" defer></script>
 </head>
 
 <body>
@@ -210,188 +26,46 @@
           </div>
 
           <div class="meta">
-            <div>
-              <span class="label">Email</span>
-              <span class="muted"><a href="mailto:sameer.pokhrel@uga.edu">sameer.pokhrel@uga.edu</a></span>
-            </div>
-            <div>
-              <span class="label">Location</span>
-              <span class="muted">Georgia, USA</span>
-            </div>
+            <div><b>Email:</b> <a href="mailto:sameer.pokhrel@uga.edu">sameer.pokhrel@uga.edu</a></div>
+            <div><b>Location:</b> Georgia, USA</div>
           </div>
 
           <div class="iconrow">
-            <a class="pill" href="https://scholar.google.com/citations?user=AEdXNxkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">
-              Google Scholar
-            </a>
-            <a class="pill" href="https://github.com/Sameerpokhrel1028" target="_blank" rel="noopener">
-              GitHub
-            </a>
-            <a class="pill" href="https://www.linkedin.com/in/sameer-pokhrel" target="_blank" rel="noopener">
-              LinkedIn
-            </a>
-            <a class="pill" href="https://www.researchgate.net/profile/Sameer-Pokhrel-2" target="_blank" rel="noopener">
-              ResearchGate
-            </a>
+            <a class="pill" href="https://scholar.google.com/citations?user=AEdXNxkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">Google Scholar</a>
+            <a class="pill" href="https://github.com/Sameerpokhrel1028" target="_blank" rel="noopener">GitHub</a>
+            <a class="pill" href="https://www.linkedin.com/in/sameer-pokhrel" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="pill" href="https://sameerpokhrel.shinyapps.io/shinyapp1kbvariants/" target="_blank" rel="noopener">Shiny App</a>
           </div>
 
           <p class="smallnote">
-            Quick links:
-            <a href="#cv">CV</a> ·
-            <a href="#contact">Contact</a> ·
-            <a href="CV.pdf" target="_blank" rel="noopener">CV (PDF)</a> ·
-            <a href="https://sameerpokhrel.shinyapps.io/shinyapp1kbvariants/" target="_blank" rel="noopener">Shiny App</a>
+            Download: <a href="assets/SAMEER_POKHREL_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
           </p>
         </div>
       </aside>
 
       <!-- MAIN -->
       <main class="main">
+
+        <!-- TOP NAV (tabs) -->
         <nav class="topnav" id="topnav">
-          <a href="#about" class="navlink active">About</a>
-          <a href="#projects" class="navlink">Research Projects</a>
-          <a href="#resume" class="navlink">Resume</a>
-          <a href="#publications" class="navlink">Publications</a>
-          <a href="#cv" class="navlink">CV</a>
-          <a href="#contact" class="navlink">Contact</a>
+          <a href="#about" class="navlink active" data-page="content/about.html">About</a>
+          <a href="#projects" class="navlink" data-page="content/projects.html">Research</a>
+          <a href="#resume" class="navlink" data-page="content/resume.html">Resume</a>
+          <a href="#publications" class="navlink" data-page="content/publications.html">Publications</a>
+          <a href="#contact" class="navlink" data-page="content/contact.html">Contact</a>
         </nav>
 
-        <section id="about" class="section">
-          <h2>About</h2>
-          <p>
-            I work on peanut (<i>Arachis hypogaea</i>) breeding and genomics with an emphasis on
-            pangenomes, introgression detection, and trait mapping for drought tolerance and disease resistance.
-          </p>
-          <p class="muted">
-            I build reproducible bioinformatics pipelines (HPC + R/Python) and interactive visualization tools
-            for genome-wide variant density and genome clustering.
-          </p>
-        </section>
-
-        <section id="projects" class="section">
-          <h2>Research Projects</h2>
-
-          <div class="grid">
-            <div class="thumb">
-              <img src="assets/project_pangenome.jpg" alt="Peanut pangenome">
-              <div class="cap">Peanut pangenome graph construction and variant projection</div>
-            </div>
-            <div class="thumb">
-              <img src="assets/project_introgression.jpg" alt="Introgression">
-              <div class="cap">Introgression detection and region-level variant profiling</div>
-            </div>
-            <div class="thumb">
-              <img src="assets/project_shiny.jpg" alt="Shiny app">
-              <div class="cap">Shiny app for variant density heatmaps and genome clustering</div>
-            </div>
-          </div>
-
-          <p style="margin-top:12px;">
-            Live app:
-            <a href="https://sameerpokhrel.shinyapps.io/shinyapp1kbvariants/" target="_blank" rel="noopener">
-              Variant Density Explorer
-            </a>
-          </p>
-        </section>
-
-        <section id="resume" class="section">
-          <h2>Resume</h2>
-
-          <div class="item">
-            <p class="title">Graduate Research Assistant — University of Georgia</p>
-            <p class="when">2022 – Present</p>
-            <p class="desc">
-              Peanut genetics and breeding, pangenome/graph genomics, trait mapping, and pipeline development.
-            </p>
-          </div>
-
-          <div class="item">
-            <p class="title">Graduate Researcher — University of Florida</p>
-            <p class="when">2019 – 2022</p>
-            <p class="desc">
-              Plant genetics research, experimental design, data analysis, and scientific communication.
-            </p>
-          </div>
-
-          <div class="item">
-            <p class="title">Awards & Highlights</p>
-            <p class="when">Selected</p>
-            <p class="desc">
-              Add scholarships, travel awards, and notable achievements here (short bullets work best).
-            </p>
-          </div>
-        </section>
-
-        <section id="publications" class="section">
-          <h2>Publications</h2>
-          <p class="muted">Keep this short; link out to Google Scholar for the full list.</p>
-          <ul>
-            <li>Author(s). Year. Title. Journal. (link)</li>
-            <li>Author(s). Year. Title. Journal/Preprint. (link)</li>
-            <li>Author(s). Year. Title. Journal. (link)</li>
-          </ul>
-          <p style="margin-top:10px;">
-            Full list:
-            <a href="https://scholar.google.com/citations?user=AEdXNxkAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">
-              Google Scholar
-            </a>
-          </p>
-        </section>
-
-        <section id="cv" class="section">
-          <h2>CV</h2>
-
-          <div class="cvbar">
-            <div class="muted">
-              Upload your CV as <b>CV.pdf</b> in the repo root (same folder as index.html).
-            </div>
-            <a class="btn" href="CV.pdf" target="_blank" rel="noopener">
-              Download CV
-            </a>
-          </div>
-
-          <iframe class="pdf" src="CV.pdf" title="CV PDF viewer"></iframe>
-
-          <p class="muted" style="margin-top:10px;">
-            If the embedded preview does not load on some devices, use the Download button above.
-          </p>
-        </section>
-
-        <section id="contact" class="section">
-          <h2>Contact</h2>
-          <p>Email: <a href="mailto:sameer.pokhrel@uga.edu">sameer.pokhrel@uga.edu</a></p>
-          <p class="muted">You can also reach me via LinkedIn.</p>
-        </section>
+        <!-- CONTENT AREA (JS loads the html files here) -->
+        <div id="content" class="section">
+          <!-- Loaded dynamically -->
+        </div>
 
         <div class="footer">
           © <span id="y"></span> Sameer Pokhrel · Built with GitHub Pages
         </div>
-      </main>
 
+      </main>
     </div>
   </div>
-
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-
-    // Active nav highlighting on scroll
-    const links = Array.from(document.querySelectorAll(".navlink"));
-    const sections = links
-      .map(a => document.querySelector(a.getAttribute("href")))
-      .filter(Boolean);
-
-    const setActive = (id) => {
-      links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) setActive(visible.target.id);
-    }, { threshold: [0.25, 0.5, 0.75] });
-
-    sections.forEach(sec => observer.observe(sec));
-  </script>
 </body>
 </html>
