@@ -1,228 +1,55 @@
-:root{
-  --bg: #ffffff;
-  --text: #111;
-  --muted: #555;
-  --line: #e5e5e5;
-  --card: #fafafa;
-  --radius: 18px;
-  --shadow: 0 8px 22px rgba(0,0,0,.06);
-}
+// shared/site.js
+document.addEventListener("DOMContentLoaded", () => {
+  // footer year
+  const y = document.getElementById("y");
+  if (y) y.textContent = new Date().getFullYear();
 
-*{ box-sizing: border-box; }
+  const nav = document.querySelector(".topnav");
+  if (!nav) return;
 
-body{
-  margin:0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  line-height: 1.75;
-  font-size: 17px;
-}
+  const links = Array.from(nav.querySelectorAll("a.navlink"));
+  const sections = Array.from(document.querySelectorAll("main .section"));
 
-a{ color: inherit; text-decoration: none; }
-a:hover{ text-decoration: underline; }
+  // If your footer uses .footer, ensure it's not treated as a "section"
+  // (it isn't, unless you gave it class="section")
 
-/* FULL WIDTH */
-.wrap{
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 32px 40px;
-}
+  function activate(id, updateHash = true) {
+    // activate section
+    sections.forEach(sec => sec.classList.toggle("active", sec.id === id));
 
-/* LAYOUT */
-.layout{
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 36px;
-  align-items: start;
-}
+    // activate nav link
+    links.forEach(a => {
+      const target = (a.getAttribute("href") || "").replace("#", "");
+      a.classList.toggle("active", target === id);
+    });
 
-/* SIDEBAR */
-.sidebar{
-  position: sticky;
-  top: 32px;
-}
+    if (updateHash) {
+      history.replaceState(null, "", `#${id}`);
+    }
+  }
 
-.card{
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--card);
-  padding: 22px;
-  box-shadow: var(--shadow);
-}
+  // click handling
+  links.forEach(a => {
+    a.addEventListener("click", (e) => {
+      const href = a.getAttribute("href") || "";
+      if (!href.startsWith("#")) return;
+      e.preventDefault();
+      const id = href.slice(1);
+      activate(id, true);
+    });
+  });
 
-.profile{ display: grid; gap: 16px; }
+  // initial tab
+  const hashId = (location.hash || "").replace("#", "");
+  const defaultId =
+    (hashId && document.getElementById(hashId) ? hashId : null) ||
+    (sections[0] ? sections[0].id : null);
 
-.avatar{
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid var(--line);
-}
+  if (defaultId) activate(defaultId, false);
 
-.name{
-  font-size: 30px;
-  font-weight: 800;
-  margin: 0;
-}
-
-.role{
-  color: var(--muted);
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.meta{
-  font-size: 15px;
-  color: var(--muted);
-}
-
-.meta div{ margin-top: 6px; }
-
-.iconrow{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.pill{
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 8px 14px;
-  background: #fff;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.smallnote{
-  font-size: 14px;
-  color: var(--muted);
-  margin-top: 14px;
-}
-
-/* MAIN */
-.main{
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: #fff;
-  box-shadow: var(--shadow);
-}
-
-/* TOP NAV */
-.topnav{
-  display: flex;
-  gap: 14px;
-  padding: 18px 22px;
-  border-bottom: 1px solid var(--line);
-  background: #fff;
-  flex-wrap: wrap;
-}
-
-.topnav a{
-  border: 1px solid var(--line);
-  padding: 10px 16px;
-  border-radius: 14px;
-  background: var(--card);
-  font-weight: 700;
-  font-size: 15px;
-}
-
-.topnav a.active{
-  border-color: #111;
-  background: #fff;
-}
-
-/* CONTENT */
-.section{
-  padding: 28px 26px;
-}
-
-.section h2{
-  font-size: 24px;
-  margin-top: 0;
-  margin-bottom: 14px;
-}
-
-.muted{ color: var(--muted); }
-
-/* GRID + THUMBS (uniform images) */
-.grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.thumb{
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 6px 18px rgba(0,0,0,.04);
-}
-
-/* ✅ MAKE ALL IMAGES SAME SIZE */
-.thumb img{
-  width: 100%;
-  height: 220px;      /* change to 180 or 240 if you want */
-  object-fit: cover;  /* crops to fit consistently */
-  display: block;
-}
-
-.thumb .cap{
-  padding: 12px 12px 14px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-/* resume-style items */
-.item{
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 16px 18px;
-  margin-top: 14px;
-  background: var(--card);
-}
-
-.item .title{
-  font-weight: 800;
-  font-size: 18px;
-  margin: 0;
-}
-
-.item .when{
-  font-size: 14px;
-  color: var(--muted);
-  margin-top: 4px;
-}
-
-.item .desc{
-  margin-top: 10px;
-}
-
-/* FOOTER */
-.footer{
-  padding: 18px 22px;
-  font-size: 14px;
-  color: var(--muted);
-  border-top: 1px solid var(--line);
-}
-
-/* TAB BEHAVIOR */
-.section{ display: none; }
-.section.active{ display: block; }
-
-/* MOBILE */
-@media (max-width: 1100px){
-  .layout{ grid-template-columns: 1fr; }
-  .sidebar{ position: static; }
-  .wrap{ padding: 20px; }
-  .grid{ grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 640px){
-  .grid{ grid-template-columns: 1fr; }
-}
+  // if user changes hash manually
+  window.addEventListener("hashchange", () => {
+    const id = (location.hash || "").replace("#", "");
+    if (id && document.getElementById(id)) activate(id, false);
+  });
+});
