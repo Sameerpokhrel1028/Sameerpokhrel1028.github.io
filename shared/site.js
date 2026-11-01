@@ -1,58 +1,36 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const content = document.getElementById("content");
-  const links = Array.from(document.querySelectorAll(".topnav .navlink"));
-
-  // footer year
-  const y = document.getElementById("y");
-  if (y) y.textContent = new Date().getFullYear();
-
-  async function loadPage(link, pushHash = true) {
-    const page = link.dataset.page;
-    if (!page) return;
-
-    // active tab highlight
-    links.forEach(a => a.classList.toggle("active", a === link));
-
-    try {
-      const res = await fetch(page, { cache: "no-cache" });
-      if (!res.ok) throw new Error(`Failed to load ${page}`);
-      const html = await res.text();
-      content.innerHTML = html;
-
-      // update URL hash
-      if (pushHash) {
-        const hash = link.getAttribute("href") || "#about";
-        history.replaceState(null, "", hash);
-      }
-
-      // feel like "new page"
-      window.scrollTo({ top: 0 });
-    } catch (err) {
-      content.innerHTML = `
-        <h2>Page failed to load</h2>
-        <p class="muted">Could not load: <b>${page}</b></p>
-      `;
-      console.error(err);
-    }
-  }
-
-  // click events
-  links.forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      loadPage(link, true);
+document.addEventListener('DOMContentLoaded', () => {
+  const content = document.getElementById('content');
+  const links = [...document.querySelectorAll('.navlink')];
+  const year = document.getElementById('y');
+  year.textContent = new Date().getFullYear();
+  let requestId = 0;
+  async function render() {
+    const id = ++requestId;
+    const hash = location.hash || '#about';
+    const link = links.find(a => a.hash === hash) || links[0];
+    content.setAttribute('aria-busy', 'true');
+    links.forEach(a => {
+      a.classList.toggle('active', a === link);
+      if (a === link) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
+    try {
+      const response = await fetch(link.dataset.page, {cache: 'no-cache'});
+      if (!response.ok) throw new Error('Page unavailable');
+      const html = await response.text();
+      if (id !== requestId) return;
+      content.innerHTML = html;
+      document.title = `${link.textContent} | Sameer Pokhrel`;
+      window.scrollTo({top: 0, behavior: 'instant'});
+    } catch (error) {
+      if (id !== requestId) return;
+      content.innerHTML = '<h1>Unable to load this page</h1><p>Please refresh to try again, or <a href="assets/CV_SameerPokhrel_October2026.pdf">read the full CV</a>.</p>';
+    } finally { if (id === requestId) content.setAttribute('aria-busy', 'false'); }
+  }
+  content.addEventListener('click', event => {
+    const jump = event.target.closest('a[data-section]');
+    if (jump) {event.preventDefault(); document.getElementById(jump.dataset.section)?.scrollIntoView({behavior:'smooth'});}
   });
-
-  // initial load based on hash
-  const hash = (location.hash || "#about").toLowerCase();
-  const match = links.find(a => (a.getAttribute("href") || "").toLowerCase() === hash) || links[0];
-  loadPage(match, false);
-
-  // handle manual hash changes
-  window.addEventListener("hashchange", () => {
-    const h = (location.hash || "#about").toLowerCase();
-    const m = links.find(a => (a.getAttribute("href") || "").toLowerCase() === h) || links[0];
-    loadPage(m, false);
-  });
+  document.querySelector('.skip-link').addEventListener('click', event => {event.preventDefault(); content.focus();});
+  window.addEventListener('hashchange', render);
+  render();
 });
